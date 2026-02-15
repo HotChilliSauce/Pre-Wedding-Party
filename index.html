@@ -8,8 +8,8 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hotchillisauce.github.io/Pre-Wedding-Party/">
-    <meta property="og:title" content="Pre-Wedding Party | JinBae & YuGyung">
-    <meta property="og:description" content="2026. 03. 28 케미스트리, 모두 함께하는 프리-웨딩 파티에 초대합니다!">
+    <meta property="og:title" content="Pre-Wedding Party | JinBae 🤍 YuGyung">
+    <meta property="og:description" content="2026. 03. 28 케미스트리, 모두 함께하는 프리웨딩 파티에 초대합니다!">
     <meta property="og:image" content="https://hotchillisauce.github.io/Pre-Wedding-Party/og-thumbnail.png">
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
@@ -21,50 +21,23 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            margin: 0;
-            background: #0a0a0a;
-            color: #fff;
-            font-family: 'Noto Sans KR', sans-serif;
-            min-height: 100vh;
-            padding: 0;
-            box-sizing: border-box;
-            overflow-x: hidden;
-        }
-        .dreamy-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000 100%);
-            z-index: -1;
-        }
-        .blob {position: absolute; background: rgba(255,255,255,0.06); filter: blur(88px); border-radius: 50%; animation: float 18s infinite alternate; pointer-events: none; z-index: -1;}
+        body { margin: 0; background: #0a0a0a; color: #fff; font-family: 'Noto Sans KR', sans-serif; min-height: 100vh; padding: 0; box-sizing: border-box; overflow-x: hidden; }
+        .dreamy-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000 100%); z-index: -1; }
+        .blob { position: absolute; background: rgba(255,255,255,0.06); filter: blur(88px); border-radius: 50%; animation: float 18s infinite alternate; pointer-events: none; z-index: -1;}
         .blob1 {width: 450px; height: 450px; top: -12%; left: -10%;}
         .blob2 {width: 330px; height: 330px; bottom: -9%; right: -7%; animation-delay: -7s;}
         .blob3 {width: 220px; height: 220px; top: 47%; right: 7%; animation-delay: -12s;}
         @keyframes float {0%{transform:translate(0,0) scale(1);}100%{transform:translate(68px,30px) scale(1.13);}}
-        .glass-card {
-            background: rgba(19, 19, 19, 0.86);
-            border: 1.5px solid rgba(255,255,255,0.13);
-            border-radius: 2.1rem;
-            margin: 3.5rem auto 2rem auto;
-            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.92);
-            max-width: 600px;
-            text-align: center;
-            position: relative;
-            padding: 2.6rem 1.2rem 2.3rem 1.2rem;
-            z-index: 5;
-            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-        }
+        .glass-card { background: rgba(19, 19, 19, 0.86); border: 1.5px solid rgba(255,255,255,0.13); border-radius: 2.1rem; margin: 3.5rem auto 2rem auto; box-shadow: 0 8px 32px 0 rgba(0,0,0,0.92); max-width: 600px; text-align: center; position: relative; padding: 2.6rem 1.2rem 2.3rem 1.2rem; z-index: 5; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);}
         .serif { font-family: 'Playfair Display', serif; letter-spacing: 0.05em;}
         .divider { margin: 2.0rem auto 1.5rem auto; height: 1.3px; width: 88%; background: linear-gradient(90deg, transparent,rgba(255,255,255,.25),transparent);}
         .shimmer {background: linear-gradient(90deg,#fff 20%,#cfcfcf 55%,#fff 80%);background-size: 220% auto;-webkit-background-clip: text;-webkit-text-fill-color: transparent;animation: shimmer 4s linear infinite;}
         @keyframes shimmer { to { background-position: 220% center; } }
         .btn-row {display: flex; gap: 10px; justify-content: center; margin-top: 0.3em; margin-bottom: 1.3em; flex-wrap: wrap;}
+        /* guestbook 모달 스타일 */
         .modal-bg { display:none; position:fixed; z-index:1000; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4);}
         .modal-content { background:#181818; border-radius:22px; max-width:430px; width:92vw; margin:9vh auto; padding:2rem 1.3rem 1.6rem 1.3rem; position:relative; }
-        .modal-content input, .modal-content textarea {
-            width: 100%; padding: 0.7em; border-radius: 8px; border: none; background: rgba(255,255,255,0.07); color: white; font-size: 1rem; margin-bottom: 0.5em; font-family: 'Noto Sans KR', sans-serif;
-        }
+        .modal-content input, .modal-content textarea { width: 100%; padding: 0.7em; border-radius: 8px; border: none; background: rgba(255,255,255,0.07); color: white; font-size: 1rem; margin-bottom: 0.5em; font-family: 'Noto Sans KR', sans-serif;}
         .modal-content button[type=submit] {margin-top: 1em; width: 100%; padding: 0.7em; border-radius: 8px; font-size: 1rem; background: #333; color: white; border: none; font-family: 'Noto Sans KR', sans-serif; cursor: pointer;}
         .guestbook-entry {background: rgba(255,255,255,0.06); border-left: 2px solid #fff3; padding: 1em; margin-bottom: 0.8em; border-radius: 8px; color: #eee; text-align:left; font-family: 'Noto Sans KR', sans-serif;}
         .glass-card footer .mt-7 {margin-top:2.2rem!important;}
@@ -127,6 +100,9 @@
                 소중한 분들을 모시고 즐거운 시간을 보내고자 합니다.<br>
                 함께 자리를 빛내주시면 감사하겠습니다.
             </div>
+            <div class="mt-7 opacity-20 text-[10px] tracking-[0.5em] uppercase">
+                Strictly Black & White
+            </div>
         </footer>
     </main>
     <!-- Guestbook Modal -->
@@ -142,8 +118,11 @@
             <div id="guestbookMessages"></div>
         </div>
     </div>
+    <!-- Firebase SDK 및 guestbook 연동 -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
     <script>
-    // dreamy-blob 배경 마우스 미세 반응
+    // dreamy-blob 배경 부드러운 마우스 tracking
     document.addEventListener('mousemove', (e) => {
         const x = e.clientX / window.innerWidth;
         const y = e.clientY / window.innerHeight;
@@ -152,10 +131,9 @@
             blob.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
         });
     });
-    // Guestbook 모달
+    // Guestbook 모달 UI
     document.getElementById('openGuestbook').onclick = () => {
         document.getElementById('guestbookModal').style.display = 'block';
-        renderMessages();
     };
     document.getElementById('closeGuestbook').onclick = () => {
         document.getElementById('guestbookModal').style.display = 'none';
@@ -163,40 +141,48 @@
     document.getElementById('guestbookModal').onclick = e => {
         if(e.target === e.currentTarget) document.getElementById('guestbookModal').style.display='none';
     };
-    // 방명록 기능
-    const guestbookForm = document.getElementById('guestbookForm');
-    const guestbookMessagesDiv = document.getElementById('guestbookMessages');
-    let messages = JSON.parse(localStorage.getItem('guestbookMessages')) || [];
-    function renderMessages() {
-        if(messages.length === 0) {
-            guestbookMessagesDiv.innerHTML = '<div style="color:#aaa;text-align:center;">첫 번째 메시지를 남겨주세요! 💕</div>';
-            return;
-        }
-        guestbookMessagesDiv.innerHTML = messages
-            .map(msg => `<div class="guestbook-entry">
-              <b style="color:white">${escapeHtml(msg.name)}</b> 
-              <span style="font-size:0.83em;color:#bbb;">${(new Date(msg.date)).toLocaleDateString('ko-KR')}</span>
-              <div style="margin-top:0.5em;font-size:1.08em;">${escapeHtml(msg.message).replace(/\\n/g,"<br>")}</div>
-              </div>`)
-            .join('');
+    // Firebase 설정 (아래 config을 본인 값으로 변경!)
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN",
+      databaseURL: "YOUR_DATABASE_URL",
+      projectId: "YOUR_PROJECT_ID"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    // 방명록 작성
+    document.getElementById('guestbookForm').onsubmit = function(e){
+      e.preventDefault();
+      const name = document.getElementById('guestName').value.trim();
+      const message = document.getElementById('guestMessage').value.trim();
+      if(name && message) {
+          db.ref('guestbook').push({ name, message, date: new Date().toISOString() });
+          document.getElementById('guestbookForm').reset();
+      }
+    };
+    // 실시간 방명록 표시
+    function renderMessages(snapshot){
+      const guestbookMessagesDiv = document.getElementById('guestbookMessages');
+      let arr = [];
+      snapshot.forEach(child => arr.push(child.val()));
+      if(arr.length === 0) {
+          guestbookMessagesDiv.innerHTML = '<div style="color:#aaa">아직 메시지가 없어요!</div>';
+          return;
+      }
+      guestbookMessagesDiv.innerHTML = arr.reverse().map(msg =>
+        `<div class="guestbook-entry">
+          <b style="color:white">${escapeHtml(msg.name)}</b>
+          <span style="font-size:0.83em;color:#bbb;">${(new Date(msg.date)).toLocaleDateString('ko-KR')}</span>
+          <div style="margin-top:0.5em;color:#ccc;font-size:1.08em;">${escapeHtml(msg.message).replace(/\\n/g,"<br>")}</div>
+        </div>`
+      ).join('');
     }
     function escapeHtml(text) {
       var div = document.createElement('div');
       div.textContent = text;
       return div.innerHTML;
     }
-    guestbookForm.onsubmit = e => {
-        e.preventDefault();
-        const name = document.getElementById('guestName').value.trim();
-        const message = document.getElementById('guestMessage').value.trim();
-        if(name && message) {
-            messages.unshift({ name, message, date: new Date().toISOString() });
-            localStorage.setItem('guestbookMessages', JSON.stringify(messages));
-            renderMessages();
-            guestbookForm.reset();
-        }
-    };
-    renderMessages();
+    db.ref('guestbook').on('value', renderMessages);
     </script>
 </body>
 </html>
