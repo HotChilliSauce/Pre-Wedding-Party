@@ -23,14 +23,20 @@ const db = getDatabase(app);
 
 // RSVP 실시간 카운트 반영
 const rsvpRef = ref(db, "rsvpCount");
-const rsvpListRef = ref(db, "rsvpList");  // [추가] 이름 저장위해 추가
+const rsvpListRef = ref(db, "rsvpList"); // [추가] 이름 저장위해 추가
 const rsvpCountSpan = document.getElementById("rsvpCount");
+
+// Firebase에서 실시간으로 RSVP 카운트 가져오기
+onValue(rsvpRef, (snapshot) => {
+  const count = snapshot.val() || 0;
+  rsvpCountSpan.textContent = count;
+});
 
 rsvpBtn.onclick = async function () {
   if (isRSVPed()) return; // 중복방지
 
   // ---- 이름 필수 입력 ----
-  const rsvpNameInput = document.getElementById('rsvpName');
+  const rsvpNameInput = document.getElementById("rsvpName");
   const name = rsvpNameInput.value.trim();
   if (!name) {
     rsvpMsg.textContent = "이름을 입력해 주세요.";
@@ -155,9 +161,9 @@ async function loadGuestbook() {
     const guestbookQuery = query(
       ref(db, "guestbook"),
       orderByChild("timestamp"),
-      limitToLast(100)
+      limitToLast(100),
     );
-    
+
     const snapshot = await get(guestbookQuery);
 
     guestbookList.innerHTML = "";
