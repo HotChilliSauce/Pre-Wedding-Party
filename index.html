@@ -1,59 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pre-Wedding Party</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        .guestbook { margin-top: 20px; }
-        .guestbook form { margin-bottom: 20px; }
-    </style>
-</head>
-<body>
-    <h1>Welcome to our Pre-Wedding Party!</h1>
-    
-    <div class="guestbook">
-        <h2>Guestbook</h2>
-        <form id="guestbook-form">
-            <input type="text" id="name" placeholder="Your Name" required>
-            <input type="email" id="email" placeholder="Your Email" required>
-            <textarea id="message" placeholder="Your Message" required></textarea>
-            <button type="submit">Submit</button>
-        </form>
-        <div id="messages"></div>
-    </div>
+<form id="guestbook">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required>
 
-    <script>
-        const form = document.getElementById('guestbook-form');
-        const messagesDiv = document.getElementById('messages');
+  <label for="message">Message:</label>
+  <textarea id="message" name="message" required></textarea>
 
-        // Load messages from localStorage
-        const loadMessages = () => {
-            const messages = JSON.parse(localStorage.getItem('messages')) || [];
-            messagesDiv.innerHTML = messages.map(msg => `<div><strong>${msg.name} (${msg.email}):</strong> ${msg.message}</div>`).join('');
-        };
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-
-            // Save to localStorage
-            const messages = JSON.parse(localStorage.getItem('messages')) || [];
-            messages.push({ name, email, message });
-            localStorage.setItem('messages', JSON.stringify(messages));
-
-            // Reload messages
-            loadMessages();
-
-            // Reset form
-            form.reset();
-        });
-
-        // Initial load
-        loadMessages();
-    </script>
-</body>
-</html>
+  <input type="submit" value="Submit">
+</form>
