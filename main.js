@@ -23,14 +23,37 @@ const db = getDatabase(app);
 
 // RSVP 실시간 카운트 반영
 const rsvpRef = ref(db, "rsvpCount");
+const rsvpListRef = ref(db, "rsvpList");  // [추가] 이름 저장위해 추가
 const rsvpCountSpan = document.getElementById("rsvpCount");
-onValue(rsvpRef, (snap) => {
-  const val = snap.val();
-  rsvpCountSpan.textContent = val ? val : 0;
-});
+...
 
-const rsvpBtn = document.getElementById("rsvpBtn");
-const rsvpMsg = document.getElementById("rsvpMsg");
+rsvpBtn.onclick = async function () {
+  if (isRSVPed()) return; // 중복방지
+
+  // ---- 이름 필수 입력 ----
+  const rsvpNameInput = document.getElementById('rsvpName');
+  const name = rsvpNameInput.value.trim();
+  if (!name) {
+    rsvpMsg.textContent = "이름을 입력해 주세요.";
+    rsvpNameInput.focus();
+    return;
+  }
+  // ----------------------
+
+  // [추가] 이름을 DB에 누적 기록 (push)
+  await set(ref(db, `rsvpList/${Date.now()}`), {
+    name: name,
+    date: new Date().toISOString(),
+  });
+
+  // 현재 카운트 받아오기
+  const snap = await get(rsvpRef);
+  let val = snap.val();
+  if (typeof val !== "number") val = 0;
+  await set(rsvpRef, val + 1);
+  setRSVPed();
+  updateRSVPBtn();
+};
 
 // 중복방지: localStorage 체크
 function isRSVPed() {
