@@ -37,9 +37,20 @@
         .rsvp-row {display: flex; justify-content: center; align-items: center; gap: 1.2em; margin-bottom: 1.3em; margin-top: 1.8em;}
         .rsvp-row button[disabled] {opacity: 0.45; cursor: default;}
         .rsvp-msg {color:#69fdff;text-align:center;margin-top:0.45em;font-size:1.07em;}
-        #guestbookScrollArea {max-height:300px;overflow-y:auto;border-radius:14px;background:rgba(255,255,255,0.03);padding:1em;}
-        .guestbook-entry {background: rgba(255,255,255,0.06); border-left: 2px solid #fff3; padding: 1em; margin-bottom: 0.8em; border-radius: 8px; color: #eee; text-align:left;}
-        @media (max-width:700px) {.glass-card {max-width:98vw;padding-left:5vw;padding-right:5vw;}.divider {width:96%;}.rsvp-row{gap:0.7em;}}
+        /* Guestbook 모달 스타일 */
+        .modal-bg { display:none; position:fixed; z-index:1000; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.42);}
+        .modal-content { background:#191a1f; border-radius:24px; max-width:440px; width:92vw; margin:9vh auto; padding:2.1rem 1.3rem 1.4rem 1.3rem; position:relative; box-shadow:0 12px 40px rgba(0,0,0,0.18);}
+        .modal-content h2 { text-align:center; margin-bottom:1.2rem; font-size:1.65rem;}
+        .modal-content form { display:flex; flex-direction:column; gap:0.8em; margin-bottom:1.1rem;}
+        .modal-content input, .modal-content textarea { width:100%; padding:0.7em; border-radius:9px; border:none; background:rgba(255,255,255,0.1); color:white; font-size:1.04rem; }
+        .modal-content button[type=submit] {margin-top: 0.4em; width:100%; padding:0.83em; border-radius:9px; font-size:1.09rem; background:#222; color:white; border:none; font-family:'Noto Sans KR',sans-serif; cursor:pointer;}
+        #guestbookScrollArea {max-height:285px; overflow-y:auto; border-radius:16px; background:rgba(255,255,255,0.045);padding:1.1em;}
+        .guestbook-entry {background: rgba(255,255,255,0.07); border-left: 3px solid #62f0ff4a; padding: 1.1em 1em 1em 1em; margin-bottom: 1.03em; border-radius: 11px; color: #efeef8; box-shadow:0 2px 16px rgba(0,0,0,0.10);}
+        .guestbook-entry b {font-weight:700;color:white;font-size:1.08em;}
+        .guestbook-entry span {color:#9cf;font-size:0.93em;margin-left:10px;}
+        .guestbook-entry div {margin-top:0.3em;color:#DFF;font-size:1.09em;word-break:break-all;}
+        #guestbookLoading {text-align:center;padding-top:0.4em;color:#bbb;font-size:0.98em;}
+        @media (max-width:700px) {.modal-content {padding:1.3rem 0.7rem 1.1rem 0.7rem;}}
     </style>
 </head>
 <body>
@@ -111,23 +122,21 @@
     <div id="guestbookModal" class="modal-bg" style="display:none">
         <div class="modal-content">
             <button id="closeGuestbook" style="position:absolute;top:1rem;right:1rem;font-size:2rem;color:#ccc;background:transparent;border:none;">×</button>
-            <h2 class="serif" style="font-size:1.7rem; margin-bottom:1rem; color:white;">Guest Book</h2>
-            <form id="guestbookForm" style="margin-bottom:1.3rem;">
+            <h2 class="serif">Guest Book</h2>
+            <form id="guestbookForm">
                 <input type="text" id="guestName" placeholder="이름 / Name" required autocomplete="off">
-                <textarea id="guestMessage" placeholder="축하 메시지를 남겨주세요 / Leave your message..." rows="4" required autocomplete="off"></textarea>
+                <textarea id="guestMessage" placeholder="축하 메시지를 남겨주세요 / Leave your message..." rows="3" required autocomplete="off"></textarea>
                 <button type="submit">메시지 남기기 / Submit Message</button>
             </form>
             <div id="guestbookScrollArea">
                 <div id="guestbookMessages"></div>
-                <div id="guestbookLoading" style="text-align:center;padding:1em;color:#bbb"></div>
+                <div id="guestbookLoading"></div>
             </div>
         </div>
     </div>
     <script type="module">
-    // 반드시 script는 body 맨 아래에 있어야 합니다!
     let modalOpened = false;
 
-    // DOM 요소 변수 선언 (DOM이 완전히 로드된 뒤여야 함)
     const openBtn = document.getElementById('openGuestbook');
     const modal = document.getElementById('guestbookModal');
     const closeBtn = document.getElementById('closeGuestbook');
@@ -135,10 +144,10 @@
     const guestbookScrollArea = document.getElementById('guestbookScrollArea');
     const guestbookLoading = document.getElementById('guestbookLoading');
     const guestbookForm = document.getElementById('guestbookForm');
-
     openBtn.onclick = () => {
         modal.style.display = 'block';
-        if (!modalOpened) {
+        document.body.style.overflow = 'hidden';
+        if(!modalOpened) {
             guestbookMessages.innerHTML = '';
             loadedKeys = [];
             hasMore = true;
@@ -148,16 +157,17 @@
     };
     closeBtn.onclick = () => {
         modal.style.display = 'none';
+        document.body.style.overflow = '';
         modalOpened = false;
     };
     modal.onclick = e => {
-        if (e.target === modal) {
+        if(e.target === modal) {
             modal.style.display = 'none';
+            document.body.style.overflow = '';
             modalOpened = false;
         }
     };
 
-    // Firebase 연동
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
     import { getDatabase, ref, get, set, onValue, push, query, orderByKey, limitToLast, endBefore } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
 
@@ -174,7 +184,7 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    // RSVP(참석 카운트) -- 중복방지 (브라우저별)
+    // 참석 카운트 (중복방지)
     const rsvpRef = ref(db, "rsvpCount");
     const rsvpCountSpan = document.getElementById('rsvpCount');
     onValue(rsvpRef, snap => {
@@ -232,7 +242,7 @@
         }
     };
 
-    // 무한스크롤 관련
+    // 무한스크롤
     function escapeHtml(text) {
         var div = document.createElement('div');
         div.textContent = text;
@@ -262,9 +272,9 @@
             loadedKeys.unshift(msg.key);
             guestbookMessages.innerHTML += `
                 <div class="guestbook-entry">
-                  <b style="color:white">${escapeHtml(msg.name)}</b>
-                  <span style="font-size:0.83em;color:#bbb;">${(new Date(msg.date)).toLocaleDateString('ko-KR')}</span>
-                  <div style="margin-top:0.5em;color:#ccc;font-size:1.08em;">${escapeHtml(msg.message).replace(/\\n/g,"<br>")}</div>
+                  <b>${escapeHtml(msg.name)}</b>
+                  <span>${(new Date(msg.date)).toLocaleDateString('ko-KR')}</span>
+                  <div>${escapeHtml(msg.message).replace(/\\n/g,"<br>")}</div>
                 </div>
               `;
         });
@@ -277,7 +287,6 @@
         }
     });
 
-    // 에러 디버깅 시 콘솔 표시
     window.onerror = function(msg,src,linen,coln,err){console.log(msg,src,linen,coln,err);}
     </script>
 </body>
