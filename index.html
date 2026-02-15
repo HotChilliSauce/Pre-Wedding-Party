@@ -364,16 +364,25 @@
           </p>
         </div>
       </section>
-      <div class="rsvp-row">
-        <button
-          id="rsvpBtn"
-          class="px-6 py-3 border border-white/20 rounded-full text-xs tracking-widest hover:bg-white hover:text-black transition-all duration-500 uppercase bg-transparent"
-        >
-          초대 수락
-        </button>
-        <span id="rsvpCount" class="text-xl font-bold text-white">0</span>
-      </div>
-      <div id="rsvpMsg" class="rsvp-msg"></div>
+      <div class="rsvp-row" style="gap:0.8em; flex-wrap:wrap;">
+  <input
+    type="text"
+    id="rsvpName"
+    placeholder="이름"
+    autocomplete="off"
+    maxlength="20"
+    style="padding:0.65em 1.2em; border-radius:14px; border:none; outline:none; background:rgba(255,255,255,0.10); font-size:1em; color:white; min-width:88px;"
+  />
+  <button
+    id="rsvpBtn"
+    class="px-6 py-3 border border-white/20 rounded-full text-xs tracking-widest hover:bg-white hover:text-black transition-all duration-500 uppercase bg-white text-black font-bold"
+    style="margin-left:2px;"
+  >
+    초대 수락
+  </button>
+  <span id="rsvpCount" class="text-xl font-bold text-white">0</span>
+</div>
+<div id="rsvpMsg" class="rsvp-msg"></div>
       <div class="btn-row">
         <a
           href="https://map.kakao.com/?q=서울 강남구 언주로94길 5"
