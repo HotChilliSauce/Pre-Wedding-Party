@@ -1,10 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Pre-Wedding Party</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Park JinBae and Oh YuGyung's Pre-Wedding Party</title>
+    <style>
+        body {
+            background-image: url('dreamy-background.jpg');
+            background-size: cover;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .glass-card {
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin: auto;
+            width: 80%;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .glass-card:hover {
+            transform: scale(1.05);
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .shimmer {
+            background: linear-gradient(270deg, #ffffff, #b2b2b2, #ffffff);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to the Pre-Wedding Party!</h1>
-    <p>Current Date and Time (UTC): 2026-02-15 12:33:03</p>
+    <div class="glass-card shimmer">
+        <h1>You're Invited!</h1>
+        <h2>Park JinBae & Oh YuGyung's Pre-Wedding Party</h2>
+        <p>Date: 2026-03-28</p>
+        <p>Time: 5:00 PM</p>
+        <p>Location: The Garden Banquet Hall</p>
+        <p>Join us for an unforgettable celebration as we honor the love of Park JinBae and Oh YuGyung.</p>
+        <p>Dress Code: Formal</p>
+    </div>
 </body>
 </html>
