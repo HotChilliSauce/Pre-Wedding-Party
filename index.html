@@ -4,8 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pre-Wedding Party | JinBae & YuGyung</title>
+    <meta name="description" content="2026년 3월 28일 (토) 케미스트리(강남) - JinBae & YuGyung Pre-Wedding Party에 초대합니다.">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hotchillisauce.github.io/Pre-Wedding-Party/">
+    <meta property="og:title" content="Pre-Wedding Party | JinBae & YuGyung">
+    <meta property="og:description" content="2026. 03. 28 케미스트리, 모두 함께하는 프리-웨딩 파티에 초대합니다!">
+    <meta property="og:image" content="https://hotchillisauce.github.io/Pre-Wedding-Party/og-thumbnail.png">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://hotchillisauce.github.io/Pre-Wedding-Party/">
+    <meta name="twitter:title" content="Pre-Wedding Party | JinBae & YuGyung">
+    <meta name="twitter:description" content="2026. 03. 28 케미스트리(강남)에서 만나요!">
+    <meta name="twitter:image" content="https://hotchillisauce.github.io/Pre-Wedding-Party/og-thumbnail.png">
+    <!-- Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 폰트: Playfair Display(영문 세리프, 하이픈 예쁨) + Noto Sans KR(한글,본문) -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -18,30 +31,17 @@
             box-sizing: border-box;
             overflow-x: hidden;
         }
-        /* Dreamy animated background */
         .dreamy-bg {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
             background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000 100%);
             z-index: -1;
         }
-        .blob {
-            position: absolute;
-            background: rgba(255,255,255,0.06);
-            filter: blur(88px);
-            border-radius: 50%;
-            animation: float 18s infinite alternate;
-            pointer-events: none;
-            z-index: -1;
-        }
+        .blob {position: absolute; background: rgba(255,255,255,0.06); filter: blur(88px); border-radius: 50%; animation: float 18s infinite alternate; pointer-events: none; z-index: -1;}
         .blob1 {width: 450px; height: 450px; top: -12%; left: -10%;}
         .blob2 {width: 330px; height: 330px; bottom: -9%; right: -7%; animation-delay: -7s;}
         .blob3 {width: 220px; height: 220px; top: 47%; right: 7%; animation-delay: -12s;}
-        @keyframes float {
-            0%{transform:translate(0,0) scale(1);}
-            100%{transform:translate(68px,30px) scale(1.13);}
-        }
-        /* Card & text */
+        @keyframes float {0%{transform:translate(0,0) scale(1);}100%{transform:translate(68px,30px) scale(1.13);}}
         .glass-card {
             background: rgba(19, 19, 19, 0.86);
             border: 1.5px solid rgba(255,255,255,0.13);
@@ -53,74 +53,22 @@
             position: relative;
             padding: 2.6rem 1.2rem 2.3rem 1.2rem;
             z-index: 5;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
         }
         .serif { font-family: 'Playfair Display', serif; letter-spacing: 0.05em;}
-        .divider {
-            margin: 2.0rem auto 1.5rem auto;
-            height: 1.3px;
-            width: 88%;
-            background: linear-gradient(90deg, transparent,rgba(255,255,255,.25),transparent);
-        }
-        .shimmer {
-            background: linear-gradient(90deg,#fff 20%,#cfcfcf 55%,#fff 80%);
-            background-size: 220% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shimmer 4s linear infinite;
-        }
+        .divider { margin: 2.0rem auto 1.5rem auto; height: 1.3px; width: 88%; background: linear-gradient(90deg, transparent,rgba(255,255,255,.25),transparent);}
+        .shimmer {background: linear-gradient(90deg,#fff 20%,#cfcfcf 55%,#fff 80%);background-size: 220% auto;-webkit-background-clip: text;-webkit-text-fill-color: transparent;animation: shimmer 4s linear infinite;}
         @keyframes shimmer { to { background-position: 220% center; } }
-        .btn-row {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 0.3em;
-            margin-bottom: 1.3em;
-            flex-wrap: wrap;
-        }
-        /* guestbook 모달 스타일 */
+        .btn-row {display: flex; gap: 10px; justify-content: center; margin-top: 0.3em; margin-bottom: 1.3em; flex-wrap: wrap;}
         .modal-bg { display:none; position:fixed; z-index:1000; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4);}
         .modal-content { background:#181818; border-radius:22px; max-width:430px; width:92vw; margin:9vh auto; padding:2rem 1.3rem 1.6rem 1.3rem; position:relative; }
         .modal-content input, .modal-content textarea {
-            width: 100%;
-            padding: 0.7em;
-            border-radius: 8px;
-            border: none;
-            background: rgba(255,255,255,0.07);
-            color: white;
-            font-size: 1rem;
-            margin-bottom: 0.5em;
-            font-family: 'Noto Sans KR', sans-serif;
+            width: 100%; padding: 0.7em; border-radius: 8px; border: none; background: rgba(255,255,255,0.07); color: white; font-size: 1rem; margin-bottom: 0.5em; font-family: 'Noto Sans KR', sans-serif;
         }
-        .modal-content button[type=submit] {
-            margin-top: 1em;
-            width: 100%;
-            padding: 0.7em;
-            border-radius: 8px;
-            font-size: 1rem;
-            background: #333;
-            color: white;
-            border: none;
-            font-family: 'Noto Sans KR', sans-serif;
-            cursor: pointer;
-        }
-        .guestbook-entry {
-            background: rgba(255,255,255,0.06);
-            border-left: 2px solid #fff3;
-            padding: 1em;
-            margin-bottom: 0.8em;
-            border-radius: 8px;
-            color: #eee;
-            text-align:left;
-            font-family: 'Noto Sans KR', sans-serif;
-        }
-        /* 기타 */
+        .modal-content button[type=submit] {margin-top: 1em; width: 100%; padding: 0.7em; border-radius: 8px; font-size: 1rem; background: #333; color: white; border: none; font-family: 'Noto Sans KR', sans-serif; cursor: pointer;}
+        .guestbook-entry {background: rgba(255,255,255,0.06); border-left: 2px solid #fff3; padding: 1em; margin-bottom: 0.8em; border-radius: 8px; color: #eee; text-align:left; font-family: 'Noto Sans KR', sans-serif;}
         .glass-card footer .mt-7 {margin-top:2.2rem!important;}
-        @media (max-width:700px) {
-            .glass-card {max-width:98vw;padding-left:5vw;padding-right:5vw;}
-            .divider {width:96%;}
-        }
+        @media (max-width:700px) {.glass-card {max-width:98vw;padding-left:5vw;padding-right:5vw;}.divider {width:96%;}}
     </style>
 </head>
 <body>
@@ -132,9 +80,7 @@
     </div>
     <!-- Invitation Card -->
     <main class="glass-card fade-in">
-        <!-- 상단 장식 -->
         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-        <!-- 메인타이틀 -->
         <header class="mb-7">
             <h1 class="serif text-5xl md:text-6xl font-light tracking-widest shimmer mb-4">
                 Pre-Wedding Party
@@ -146,7 +92,6 @@
             </div>
         </header>
         <div class="divider"></div>
-        <!-- 상세 내용 -->
         <section class="space-y-8 my-10 mb-7">
             <div class="space-y-2">
                 <p class="text-xs tracking-[0.3em] text-gray-400 uppercase">When</p>
@@ -167,7 +112,6 @@
                 </p>
             </div>
         </section>
-        <!-- 지도/방명록 버튼 한 줄 -->
         <div class="btn-row">
             <a href="https://map.kakao.com/?q=서울 강남구 언주로94길 5" target="_blank" class="inline-block px-8 py-3 border border-white/20 rounded-full text-xs tracking-widest hover:bg-white hover:text-black transition-all duration-500 uppercase">
                 View Map
@@ -177,7 +121,6 @@
             </button>
         </div>
         <div class="divider"></div>
-        <!-- 하단 메시지/각주 -->
         <footer class="mt-6 mb-2">
             <div class="text-sm font-light text-gray-400 leading-loose mb-2">
                 저희의 새로운 시작을 앞두고<br>
@@ -189,7 +132,6 @@
             </div>
         </footer>
     </main>
-
     <!-- Guestbook Modal -->
     <div id="guestbookModal" class="modal-bg">
         <div class="modal-content">
@@ -204,7 +146,7 @@
         </div>
     </div>
     <script>
-    // dreamy-blob 배경 부드럽게 따라다니기(선택/비활성화 하고 싶으면 주석처리)
+    // dreamy-blob 배경 마우스 미세 반응
     document.addEventListener('mousemove', (e) => {
         const x = e.clientX / window.innerWidth;
         const y = e.clientY / window.innerHeight;
