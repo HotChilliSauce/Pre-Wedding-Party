@@ -25,7 +25,6 @@ const db = getDatabase(app);
 const rsvpRef = ref(db, "rsvpCount");
 const rsvpListRef = ref(db, "rsvpList");  // [추가] 이름 저장위해 추가
 const rsvpCountSpan = document.getElementById("rsvpCount");
-...
 
 rsvpBtn.onclick = async function () {
   if (isRSVPed()) return; // 중복방지
