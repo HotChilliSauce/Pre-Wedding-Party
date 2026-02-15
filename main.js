@@ -82,18 +82,6 @@ function updateRSVPBtn() {
 }
 updateRSVPBtn();
 
-// 버튼 클릭 시 중복방지/카운트 증가
-rsvpBtn.onclick = async function () {
-  if (isRSVPed()) return; // 중복방지
-  // 현재 카운트 받아오기
-  const snap = await get(rsvpRef);
-  let val = snap.val();
-  if (typeof val !== "number") val = 0;
-  await set(rsvpRef, val + 1);
-  setRSVPed();
-  updateRSVPBtn();
-};
-
 // dreamy-blob 배경 마우스 트래킹
 document.addEventListener("mousemove", (e) => {
   const x = e.clientX / window.innerWidth;
