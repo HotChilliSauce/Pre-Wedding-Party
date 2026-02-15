@@ -1,293 +1,440 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pre-Wedding Party | JinBae & YuGyung</title>
-    <meta name="description" content="2026년 3월 28일 (토) 케미스트리(강남) - JinBae & YuGyung Pre-Wedding Party에 초대합니다.">
+    <meta
+      name="description"
+      content="2026년 3월 28일 (토) 케미스트리(강남) - JinBae & YuGyung Pre-Wedding Party에 초대합니다."
+    />
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://hotchillisauce.github.io/Pre-Wedding-Party/">
-    <meta property="og:title" content="Pre-Wedding Party | JinBae 🤍 YuGyung">
-    <meta property="og:description" content="2026. 03. 28 케미스트리, 모두 함께하는 프리웨딩 파티에 초대합니다!">
-    <meta property="og:image" content="https://hotchillisauce.github.io/Pre-Wedding-Party/og-thumbnail.png">
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://hotchillisauce.github.io/Pre-Wedding-Party/"
+    />
+    <meta property="og:title" content="Pre-Wedding Party | JinBae 🤍 YuGyung" />
+    <meta
+      property="og:description"
+      content="2026. 03. 28 케미스트리, 모두 함께하는 프리웨딩 파티에 초대합니다!"
+    />
+    <meta
+      property="og:image"
+      content="https://hotchillisauce.github.io/Pre-Wedding-Party/og-thumbnail.png"
+    />
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://hotchillisauce.github.io/Pre-Wedding-Party/">
-    <meta name="twitter:title" content="Pre-Wedding Party | JinBae 🤍 YuGyung">
-    <meta name="twitter:description" content="2026. 03. 28 케미스트리(강남)에서 만나요!">
-    <meta name="twitter:image" content="https://hotchillisauce.github.io/Pre-Wedding-Party/og-thumbnail.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:url"
+      content="https://hotchillisauce.github.io/Pre-Wedding-Party/"
+    />
+    <meta
+      name="twitter:title"
+      content="Pre-Wedding Party | JinBae 🤍 YuGyung"
+    />
+    <meta
+      name="twitter:description"
+      content="2026. 03. 28 케미스트리(강남)에서 만나요!"
+    />
+    <meta
+      name="twitter:image"
+      content="https://hotchillisauce.github.io/Pre-Wedding-Party/og-thumbnail.png"
+    />
+    <!-- Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Noto+Sans+KR:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        body { margin: 0; background: #0a0a0a; color: #fff; font-family: 'Noto Sans KR', sans-serif; min-height: 100vh; padding: 0; }
-        .dreamy-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000 100%); z-index: -1; }
-        .blob { position: absolute; background: rgba(255,255,255,0.06); filter: blur(88px); border-radius: 50%; animation: float 18s infinite alternate; pointer-events: none; z-index: -1;}
-        .blob1 {width: 450px; height: 450px; top: -12%; left: -10%;}
-        .blob2 {width: 330px; height: 330px; bottom: -9%; right: -7%; animation-delay: -7s;}
-        .blob3 {width: 220px; height: 220px; top: 47%; right: 7%; animation-delay: -12s;}
-        @keyframes float {0%{transform:translate(0,0) scale(1);}100%{transform:translate(68px,30px) scale(1.13);}}
-        .glass-card { background: rgba(19, 19, 19, 0.86); border: 1.5px solid rgba(255,255,255,0.13); border-radius: 2.1rem; margin: 3.5rem auto 2rem auto; box-shadow: 0 8px 32px 0 rgba(0,0,0,0.92); max-width: 600px; text-align: center; position: relative; padding: 2.6rem 1.2rem 2.3rem 1.2rem; z-index: 5; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);}
-        .serif { font-family: 'Playfair Display', serif; letter-spacing: 0.05em;}
-        .divider { margin: 2.0rem auto 1.5rem auto; height: 1.3px; width: 88%; background: linear-gradient(90deg, transparent,rgba(255,255,255,.25),transparent);}
-        .shimmer {background: linear-gradient(90deg,#fff 20%,#cfcfcf 55%,#fff 80%);background-size: 220% auto;-webkit-background-clip: text;-webkit-text-fill-color: transparent;animation: shimmer 4s linear infinite;}
-        @keyframes shimmer { to { background-position: 220% center; } }
-        .btn-row {display: flex; gap: 10px; justify-content: center; margin-top: 0.3em; margin-bottom: 1.3em; flex-wrap: wrap;}
-        .glass-card footer .mt-7 {margin-top:2.2rem!important;}
-        .rsvp-row {display: flex; justify-content: center; align-items: center; gap: 1.2em; margin-bottom: 1.3em; margin-top: 1.8em;}
-        .rsvp-row button[disabled] {opacity: 0.45; cursor: default;}
-        .rsvp-msg {color:#69fdff;text-align:center;margin-top:0.45em;font-size:1.07em;}
-        /* Guestbook 모달 스타일 */
-        .modal-bg { display:none; position:fixed; z-index:1000; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.42);}
-        .modal-content { background:#191a1f; border-radius:24px; max-width:440px; width:92vw; margin:9vh auto; padding:2.1rem 1.3rem 1.4rem 1.3rem; position:relative; box-shadow:0 12px 40px rgba(0,0,0,0.18);}
-        .modal-content h2 { text-align:center; margin-bottom:1.2rem; font-size:1.65rem;}
-        .modal-content form { display:flex; flex-direction:column; gap:0.8em; margin-bottom:1.1rem;}
-        .modal-content input, .modal-content textarea { width:100%; padding:0.7em; border-radius:9px; border:none; background:rgba(255,255,255,0.1); color:white; font-size:1.04rem; }
-        .modal-content button[type=submit] {margin-top: 0.4em; width:100%; padding:0.83em; border-radius:9px; font-size:1.09rem; background:#222; color:white; border:none; font-family:'Noto Sans KR',sans-serif; cursor:pointer;}
-        #guestbookScrollArea {max-height:285px; overflow-y:auto; border-radius:16px; background:rgba(255,255,255,0.045);padding:1.1em;}
-        .guestbook-entry {background: rgba(255,255,255,0.07); border-left: 3px solid #62f0ff4a; padding: 1.1em 1em 1em 1em; margin-bottom: 1.03em; border-radius: 11px; color: #efeef8; box-shadow:0 2px 16px rgba(0,0,0,0.10);}
-        .guestbook-entry b {font-weight:700;color:white;font-size:1.08em;}
-        .guestbook-entry span {color:#9cf;font-size:0.93em;margin-left:10px;}
-        .guestbook-entry div {margin-top:0.3em;color:#DFF;font-size:1.09em;word-break:break-all;}
-        #guestbookLoading {text-align:center;padding-top:0.4em;color:#bbb;font-size:0.98em;}
-        @media (max-width:700px) {.modal-content {padding:1.3rem 0.7rem 1.1rem 0.7rem;}}
+      body {
+        margin: 0;
+        background: #0a0a0a;
+        color: #fff;
+        font-family: "Noto Sans KR", sans-serif;
+        min-height: 100vh;
+        padding: 0;
+        box-sizing: border-box;
+        overflow-x: hidden;
+      }
+      .dreamy-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000 100%);
+        z-index: -1;
+      }
+      .blob {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.06);
+        filter: blur(88px);
+        border-radius: 50%;
+        animation: float 18s infinite alternate;
+        pointer-events: none;
+        z-index: -1;
+      }
+      .blob1 {
+        width: 450px;
+        height: 450px;
+        top: -12%;
+        left: -10%;
+      }
+      .blob2 {
+        width: 330px;
+        height: 330px;
+        bottom: -9%;
+        right: -7%;
+        animation-delay: -7s;
+      }
+      .blob3 {
+        width: 220px;
+        height: 220px;
+        top: 47%;
+        right: 7%;
+        animation-delay: -12s;
+      }
+      @keyframes float {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        100% {
+          transform: translate(68px, 30px) scale(1.13);
+        }
+      }
+      .glass-card {
+        background: rgba(19, 19, 19, 0.86);
+        border: 1.5px solid rgba(255, 255, 255, 0.13);
+        border-radius: 2.1rem;
+        margin: 3.5rem auto 2rem auto;
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.92);
+        max-width: 600px;
+        text-align: center;
+        position: relative;
+        padding: 2.6rem 1.2rem 2.3rem 1.2rem;
+        z-index: 5;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+      }
+      .serif {
+        font-family: "Playfair Display", serif;
+        letter-spacing: 0.05em;
+      }
+      .divider {
+        margin: 2rem auto 1.5rem auto;
+        height: 1.3px;
+        width: 88%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.25),
+          transparent
+        );
+      }
+      .shimmer {
+        background: linear-gradient(90deg, #fff 20%, #cfcfcf 55%, #fff 80%);
+        background-size: 220% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shimmer 4s linear infinite;
+      }
+      @keyframes shimmer {
+        to {
+          background-position: 220% center;
+        }
+      }
+      .btn-row {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin-top: 0.3em;
+        margin-bottom: 1.3em;
+        flex-wrap: wrap;
+      }
+      .glass-card footer .mt-7 {
+        margin-top: 2.2rem !important;
+      }
+      /* RSVP 카운트 디자인 */
+      .rsvp-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1.2em;
+        margin-bottom: 1.3em;
+        margin-top: 1.8em;
+      }
+      .rsvp-row button[disabled] {
+        opacity: 0.45;
+        cursor: default;
+      }
+      .rsvp-msg {
+        color: #69fdff;
+        text-align: center;
+        margin-top: 0.45em;
+        font-size: 1.07em;
+      }
+      @media (max-width: 700px) {
+        .glass-card {
+          max-width: 98vw;
+          padding-left: 5vw;
+          padding-right: 5vw;
+        }
+        .divider {
+          width: 96%;
+        }
+        .rsvp-row {
+          gap: 0.7em;
+        }
+      }
+      /* 방명록 모달 스타일 */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+      .modal-overlay.active {
+        opacity: 1;
+        pointer-events: all;
+      }
+      .modal-content {
+        background: rgba(19, 19, 19, 0.95);
+        border: 1.5px solid rgba(255, 255, 255, 0.13);
+        border-radius: 1.5rem;
+        padding: 2rem;
+        max-width: 500px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+        position: relative;
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+      }
+      .modal-overlay.active .modal-content {
+        transform: scale(1);
+      }
+      .modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+      .modal-close:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.4);
+      }
+      .guestbook-form {
+        margin-top: 1.5rem;
+      }
+      .guestbook-form input,
+      .guestbook-form textarea {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 0.5rem;
+        padding: 0.75rem;
+        color: #fff;
+        font-family: "Noto Sans KR", sans-serif;
+        margin-bottom: 1rem;
+        font-size: 14px;
+      }
+      .guestbook-form input::placeholder,
+      .guestbook-form textarea::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+      }
+      .guestbook-form textarea {
+        min-height: 100px;
+        resize: vertical;
+      }
+      .guestbook-submit {
+        width: 100%;
+        padding: 0.75rem;
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 2rem;
+        color: #fff;
+        cursor: pointer;
+        font-size: 13px;
+        letter-spacing: 0.1em;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+      }
+      .guestbook-submit:hover {
+        background: rgba(255, 255, 255, 1);
+        color: #000;
+      }
+      .guestbook-list {
+        margin-top: 2rem;
+        max-height: 300px;
+        overflow-y: auto;
+      }
+      .guestbook-item {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 0.75rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
+      }
+      .guestbook-item-name {
+        font-weight: bold;
+        font-size: 14px;
+        margin-bottom: 0.5rem;
+        color: #69fdff;
+      }
+      .guestbook-item-message {
+        font-size: 13px;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.8);
+      }
+      .guestbook-item-date {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.4);
+        margin-top: 0.5rem;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <!-- Dreamy animated background -->
     <div class="dreamy-bg">
-        <div class="blob blob1"></div>
-        <div class="blob blob2"></div>
-        <div class="blob blob3"></div>
+      <div class="blob blob1"></div>
+      <div class="blob blob2"></div>
+      <div class="blob blob3"></div>
     </div>
+    <!-- Invitation Card -->
     <main class="glass-card fade-in">
-        <header class="mb-7">
-            <h1 class="serif text-5xl md:text-6xl font-light tracking-widest shimmer mb-4">
-                Pre-Wedding Party
-            </h1>
-            <div class="flex items-center justify-center gap-4 text-lg md:text-xl font-light tracking-widest text-gray-300">
-                <span class="serif italic">Park JinBae</span>
-                <span class="text-xs opacity-50">🤍</span>
-                <span class="serif italic">Oh YuGyung</span>
-            </div>
-        </header>
-        <div class="divider"></div>
-        <section class="space-y-8 my-10 mb-7">
-            <div class="space-y-2">
-                <p class="text-xs tracking-[0.3em] text-gray-400 uppercase">When</p>
-                <div class="text-xl md:text-2xl font-light">
-                    2026. 03. 28 <span class="text-sm mx-1">SAT</span>
-                </div>
-                <p class="text-sm font-light text-gray-300">
-                    p.m. 7:00 — a.m. 3:00 (익일)
-                </p>
-            </div>
-            <div class="space-y-2">
-                <p class="text-xs tracking-[0.3em] text-gray-400 uppercase">Where</p>
-                <div class="text-xl font-light">
-                    케미스트리 (Chemistry)
-                </div>
-                <p class="text-sm font-light text-gray-400 leading-relaxed">
-                    서울 강남구 언주로94길 5, 2층
-                </p>
-            </div>
-        </section>
-        <div class="rsvp-row">
-            <button id="rsvpBtn" class="px-6 py-3 border border-white/20 rounded-full text-xs tracking-widest hover:bg-white hover:text-black transition-all duration-500 uppercase bg-transparent">
-                초대 수락
-            </button>
-            <span id="rsvpCount" class="text-xl font-bold text-white">0</span>
+      <div
+        class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+      ></div>
+      <header class="mb-7">
+        <h1
+          class="serif text-5xl md:text-6xl font-light tracking-widest shimmer mb-4"
+        >
+          Pre-Wedding Party
+        </h1>
+        <div
+          class="flex items-center justify-center gap-4 text-lg md:text-xl font-light tracking-widest text-gray-300"
+        >
+          <span class="serif italic">Park JinBae</span>
+          <span class="text-xs opacity-50">🤍</span>
+          <span class="serif italic">Oh YuGyung</span>
         </div>
-        <div id="rsvpMsg" class="rsvp-msg"></div>
-        <div class="btn-row">
-            <a href="https://map.kakao.com/?q=서울 강남구 언주로94길 5" target="_blank" class="inline-block px-8 py-3 border border-white/20 rounded-full text-xs tracking-widest hover:bg-white hover:text-black transition-all duration-500 uppercase">
-                View Map
-            </a>
-            <button id="openGuestbook" class="inline-block px-8 py-3 border border-white/20 rounded-full text-xs tracking-widest hover:bg-white hover:text-black transition-all duration-500 uppercase bg-transparent">
-                Guest Book
-            </button>
+      </header>
+      <div class="divider"></div>
+      <section class="space-y-8 my-10 mb-7">
+        <div class="space-y-2">
+          <p class="text-xs tracking-[0.3em] text-gray-400 uppercase">When</p>
+          <div class="text-xl md:text-2xl font-light">
+            2026. 03. 28 <span class="text-sm mx-1">SAT</span>
+          </div>
+          <p class="text-sm font-light text-gray-300">
+            p.m. 7:00 — a.m. 3:00 (익일)
+          </p>
         </div>
-        <div class="divider"></div>
-        <footer class="mt-6 mb-2">
-            <div class="text-sm font-light text-gray-400 leading-loose mb-2">
-                저희의 새로운 시작을 앞두고<br>
-                소중한 분들을 모시고 즐거운 시간을 보내고자 합니다.<br>
-                함께 자리를 빛내주시면 감사하겠습니다.
-            </div>
-            <div class="mt-7 opacity-20 text-[10px] tracking-[0.5em] uppercase">
-                Strictly Black & White
-            </div>
-        </footer>
+        <div class="space-y-2">
+          <p class="text-xs tracking-[0.3em] text-gray-400 uppercase">Where</p>
+          <div class="text-xl font-light">케미스트리 (Chemistry)</div>
+          <p class="text-sm font-light text-gray-400 leading-relaxed">
+            서울 강남구 언주로94길 5, 2층
+          </p>
+        </div>
+      </section>
+      <div class="rsvp-row">
+        <button
+          id="rsvpBtn"
+          class="px-6 py-3 border border-white/20 rounded-full text-xs tracking-widest hover:bg-white hover:text-black transition-all duration-500 uppercase bg-transparent"
+        >
+          초대 수락
+        </button>
+        <span id="rsvpCount" class="text-xl font-bold text-white">0</span>
+      </div>
+      <div id="rsvpMsg" class="rsvp-msg"></div>
+      <div class="btn-row">
+        <a
+          href="https://map.kakao.com/?q=서울 강남구 언주로94길 5"
+          target="_blank"
+          class="inline-block px-8 py-3 border border-white/20 rounded-full text-xs tracking-widest hover:bg-white hover:text-black transition-all duration-500 uppercase"
+        >
+          View Map
+        </a>
+        <button
+          id="openGuestbook"
+          class="inline-block px-8 py-3 border border-white/20 rounded-full text-xs tracking-widest hover:bg-white hover:text-black transition-all duration-500 uppercase bg-transparent"
+        >
+          Guest Book
+        </button>
+      </div>
+      <div class="divider"></div>
+      <footer class="mt-6 mb-2">
+        <div class="text-sm font-light text-gray-400 leading-loose mb-2">
+          저희의 새로운 시작을 앞두고<br />
+          소중한 분들을 모시고 즐거운 시간을 보내고자 합니다.<br />
+          함께 자리를 빛내주시면 감사하겠습니다.
+        </div>
+        <div class="mt-7 opacity-20 text-[10px] tracking-[0.5em] uppercase">
+          Strictly Black & White
+        </div>
+      </footer>
     </main>
-    <!-- Guestbook Modal -->
-    <div id="guestbookModal" class="modal-bg" style="display:none">
-        <div class="modal-content">
-            <button id="closeGuestbook" style="position:absolute;top:1rem;right:1rem;font-size:2rem;color:#ccc;background:transparent;border:none;">×</button>
-            <h2 class="serif">Guest Book</h2>
-            <form id="guestbookForm">
-                <input type="text" id="guestName" placeholder="이름 / Name" required autocomplete="off">
-                <textarea id="guestMessage" placeholder="축하 메시지를 남겨주세요 / Leave your message..." rows="3" required autocomplete="off"></textarea>
-                <button type="submit">메시지 남기기 / Submit Message</button>
-            </form>
-            <div id="guestbookScrollArea">
-                <div id="guestbookMessages"></div>
-                <div id="guestbookLoading"></div>
-            </div>
+
+    <!-- 방명록 모달 -->
+    <div id="guestbookModal" class="modal-overlay">
+      <div class="modal-content">
+        <button class="modal-close" id="closeGuestbook">✕</button>
+        <h2 class="serif text-3xl font-light tracking-wider text-center mb-4">
+          Guest Book
+        </h2>
+        <div class="divider" style="margin: 1rem auto"></div>
+
+        <!-- 방명록 작성 폼 -->
+        <form class="guestbook-form" id="guestbookForm">
+          <input
+            type="text"
+            id="guestName"
+            placeholder="이름"
+            required
+            maxlength="20"
+          />
+          <textarea
+            id="guestMessage"
+            placeholder="축하 메시지를 남겨주세요"
+            required
+            maxlength="200"
+          ></textarea>
+          <button type="submit" class="guestbook-submit">메시지 남기기</button>
+        </form>
+
+        <!-- 방명록 목록 -->
+        <div class="guestbook-list" id="guestbookList">
+          <!-- 방명록 항목들이 여기에 표시됩니다 -->
         </div>
+      </div>
     </div>
-    <script type="module">
-    let modalOpened = false;
 
-    const openBtn = document.getElementById('openGuestbook');
-    const modal = document.getElementById('guestbookModal');
-    const closeBtn = document.getElementById('closeGuestbook');
-    const guestbookMessages = document.getElementById('guestbookMessages');
-    const guestbookScrollArea = document.getElementById('guestbookScrollArea');
-    const guestbookLoading = document.getElementById('guestbookLoading');
-    const guestbookForm = document.getElementById('guestbookForm');
-    openBtn.onclick = () => {
-        modal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-        if(!modalOpened) {
-            guestbookMessages.innerHTML = '';
-            loadedKeys = [];
-            hasMore = true;
-            loadMoreGuestbook();
-            modalOpened = true;
-        }
-    };
-    closeBtn.onclick = () => {
-        modal.style.display = 'none';
-        document.body.style.overflow = '';
-        modalOpened = false;
-    };
-    modal.onclick = e => {
-        if(e.target === modal) {
-            modal.style.display = 'none';
-            document.body.style.overflow = '';
-            modalOpened = false;
-        }
-    };
-
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-    import { getDatabase, ref, get, set, onValue, push, query, orderByKey, limitToLast, endBefore } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
-
-    const firebaseConfig = {
-        apiKey: "AIzaSyCFrTzMJEZMpxChJ_lsj_RdtPC87wzvI4U",
-        authDomain: "pre-wedding-party.firebaseapp.com",
-        databaseURL: "https://pre-wedding-party-default-rtdb.firebaseio.com",
-        projectId: "pre-wedding-party",
-        storageBucket: "pre-wedding-party.firebaseapp.com",
-        messagingSenderId: "642438297363",
-        appId: "1:642438297363:web:979d7db7511f2a4f6b4ce6",
-        measurementId: "G-3HWLRVWQWC"
-    };
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-
-    // 참석 카운트 (중복방지)
-    const rsvpRef = ref(db, "rsvpCount");
-    const rsvpCountSpan = document.getElementById('rsvpCount');
-    onValue(rsvpRef, snap => {
-        const val = snap.val();
-        rsvpCountSpan.textContent = val ? val : 0;
-    });
-    const rsvpBtn = document.getElementById('rsvpBtn');
-    const rsvpMsg = document.getElementById('rsvpMsg');
-    function isRSVPed() { return localStorage.getItem('preWeddingRSVPed2026') === 'yes'; }
-    function setRSVPed() { localStorage.setItem('preWeddingRSVPed2026', 'yes'); }
-    function updateRSVPBtn() {
-        if(isRSVPed()) {
-            rsvpBtn.disabled = true;
-            rsvpBtn.textContent = "참석 확인 완료";
-            rsvpMsg.textContent = "이미 참석 수락하셨습니다!";
-        } else {
-            rsvpBtn.disabled = false;
-            rsvpBtn.textContent = "초대 수락";
-            rsvpMsg.textContent = "";
-        }
-    }
-    updateRSVPBtn();
-    rsvpBtn.onclick = async function() {
-        if(isRSVPed()) return;
-        const snap = await get(rsvpRef);
-        let val = snap.val();
-        if(typeof val !== "number") val = 0;
-        await set(rsvpRef, val + 1);
-        setRSVPed();
-        updateRSVPBtn();
-    };
-
-    // dreamy-blob 배경 마우스 트래킹
-    document.addEventListener('mousemove', (e) => {
-        const x = e.clientX / window.innerWidth;
-        const y = e.clientY / window.innerHeight;
-        document.querySelectorAll('.blob').forEach((blob, i) => {
-            const speed = (i+1)*18;
-            blob.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
-        });
-    });
-
-    // 방명록 작성
-    guestbookForm.onsubmit = async function(e){
-        e.preventDefault();
-        const name = document.getElementById('guestName').value.trim();
-        const message = document.getElementById('guestMessage').value.trim();
-        if(name && message) {
-            await push(ref(db, "guestbook"), { name, message, date: new Date().toISOString() });
-            guestbookForm.reset();
-            guestbookMessages.innerHTML = '';
-            loadedKeys = [];
-            hasMore = true;
-            loadMoreGuestbook();
-        }
-    };
-
-    // 무한스크롤
-    function escapeHtml(text) {
-        var div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    }
-    let loadedKeys = [];
-    let hasMore = true;
-    const PAGE_SIZE = 10;
-    async function loadMoreGuestbook() {
-        if(!hasMore) return;
-        guestbookLoading.innerText = '불러오는 중...';
-        let q;
-        if(loadedKeys.length === 0) {
-            q = query(ref(db, "guestbook"), orderByKey(), limitToLast(PAGE_SIZE));
-        } else {
-            q = query(ref(db, "guestbook"), orderByKey(), endBefore(loadedKeys[0]), limitToLast(PAGE_SIZE));
-        }
-        const snap = await get(q);
-        const arr = [];
-        snap.forEach(child => arr.push({ key: child.key, ...child.val() }));
-        if(arr.length === 0) {
-            hasMore = false;
-            guestbookLoading.innerText = '더 이상 메시지가 없습니다.';
-            return;
-        }
-        arr.reverse().forEach(msg => {
-            loadedKeys.unshift(msg.key);
-            guestbookMessages.innerHTML += `
-                <div class="guestbook-entry">
-                  <b>${escapeHtml(msg.name)}</b>
-                  <span>${(new Date(msg.date)).toLocaleDateString('ko-KR')}</span>
-                  <div>${escapeHtml(msg.message).replace(/\\n/g,"<br>")}</div>
-                </div>
-              `;
-        });
-        guestbookLoading.innerText = hasMore ? '아래로 스크롤하면 더 볼 수 있어요 ⬇️' : '';
-    }
-    guestbookScrollArea.addEventListener('scroll', function() {
-        if(!hasMore) return;
-        if(this.scrollTop + this.offsetHeight >= this.scrollHeight - 30) {
-            loadMoreGuestbook();
-        }
-    });
-
-    window.onerror = function(msg,src,linen,coln,err){console.log(msg,src,linen,coln,err);}
-    </script>
-</body>
+    <!-- RSVP/방명록/배경 Firebase 연동 -->
+    <script type="module" src="main.js"></script>
+  </body>
 </html>
