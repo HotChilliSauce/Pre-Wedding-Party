@@ -8,13 +8,13 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hotchillisauce.github.io/Pre-Wedding-Party/">
-    <meta property="og:title" content="Pre-Wedding Party | JinBae 🤍 YuGyung">
+    <meta property="og:title" content="Pre-Wedding Party | JinBae & YuGyung">
     <meta property="og:description" content="2026. 03. 28 케미스트리, 모두 함께하는 프리웨딩 파티에 초대합니다!">
     <meta property="og:image" content="https://hotchillisauce.github.io/Pre-Wedding-Party/og-thumbnail.png">
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://hotchillisauce.github.io/Pre-Wedding-Party/">
-    <meta name="twitter:title" content="Pre-Wedding Party | JinBae 🤍 YuGyung">
+    <meta name="twitter:title" content="Pre-Wedding Party | JinBae & YuGyung">
     <meta name="twitter:description" content="2026. 03. 28 케미스트리(강남)에서 만나요!">
     <meta name="twitter:image" content="https://hotchillisauce.github.io/Pre-Wedding-Party/og-thumbnail.png">
     <!-- Fonts & Tailwind -->
@@ -35,11 +35,9 @@
         @keyframes shimmer { to { background-position: 220% center; } }
         .btn-row {display: flex; gap: 10px; justify-content: center; margin-top: 0.3em; margin-bottom: 1.3em; flex-wrap: wrap;}
         .glass-card footer .mt-7 {margin-top:2.2rem!important;}
-        /* RSVP 카운트 디자인 */
         .rsvp-row {display: flex; justify-content: center; align-items: center; gap: 1.2em; margin-bottom: 1.3em; margin-top: 1.8em;}
         .rsvp-row button[disabled] {opacity: 0.45; cursor: default;}
         .rsvp-msg {color:#69fdff;text-align:center;margin-top:0.45em;font-size:1.07em;}
-        /* guestbook 스타일 */
         #guestbookScrollArea {max-height:300px;overflow-y:auto;border-radius:14px;background:rgba(255,255,255,0.03);padding:1em;}
         .guestbook-entry {background: rgba(255,255,255,0.06); border-left: 2px solid #fff3; padding: 1em; margin-bottom: 0.8em; border-radius: 8px; color: #eee; text-align:left;}
         @media (max-width:700px) {.glass-card {max-width:98vw;padding-left:5vw;padding-right:5vw;}.divider {width:96%;}.rsvp-row{gap:0.7em;}}
@@ -118,13 +116,11 @@
         <div class="modal-content">
             <button id="closeGuestbook" style="position:absolute;top:1rem;right:1rem;font-size:2rem;color:#ccc;background:transparent;border:none;">×</button>
             <h2 class="serif" style="font-size:1.7rem; margin-bottom:1rem; color:white;">Guest Book</h2>
-            <!-- 작성 폼 -->
             <form id="guestbookForm" style="margin-bottom:1.3rem;">
                 <input type="text" id="guestName" placeholder="이름 / Name" required autocomplete="off">
                 <textarea id="guestMessage" placeholder="축하 메시지를 남겨주세요 / Leave your message..." rows="4" required autocomplete="off"></textarea>
                 <button type="submit">메시지 남기기 / Submit Message</button>
             </form>
-            <!-- 무한 스크롤 방명록 -->
             <div id="guestbookScrollArea">
                 <div id="guestbookMessages"></div>
                 <div id="guestbookLoading" style="text-align:center;padding:1em;color:#bbb"></div>
@@ -133,6 +129,7 @@
     </div>
     <!-- Firebase SDK + RSVP + Guestbook Infinite Scroll -->
     <script type="module">
+      let modalOpened = false;
       import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
       import { getDatabase, ref, get, set, onValue, push, query, orderByKey, limitToLast, endBefore } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
       const firebaseConfig = {
@@ -163,7 +160,7 @@
           if(isRSVPed()) {
               rsvpBtn.disabled = true;
               rsvpBtn.textContent = "참석 확인 완료";
-              rsvpMsg.textContent = "이미 참석 수락하셨습니다! 고마워요 :)";
+              rsvpMsg.textContent = "이미 참석 수락하셨습니다! ���마워요 :)";
           } else {
               rsvpBtn.disabled = false;
               rsvpBtn.textContent = "초대 수락";
@@ -273,7 +270,6 @@
               loadMoreGuestbook();
           }
       });
-      let modalOpened = false;
     </script>
 </body>
 </html>
