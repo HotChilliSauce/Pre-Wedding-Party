@@ -34,13 +34,12 @@
         .shimmer {background: linear-gradient(90deg,#fff 20%,#cfcfcf 55%,#fff 80%);background-size: 220% auto;-webkit-background-clip: text;-webkit-text-fill-color: transparent;animation: shimmer 4s linear infinite;}
         @keyframes shimmer { to { background-position: 220% center; } }
         .btn-row {display: flex; gap: 10px; justify-content: center; margin-top: 0.3em; margin-bottom: 1.3em; flex-wrap: wrap;}
-        .modal-bg { display:none; position:fixed; z-index:1000; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4);}
-        .modal-content { background:#181818; border-radius:22px; max-width:430px; width:92vw; margin:9vh auto; padding:2rem 1.3rem 1.6rem 1.3rem; position:relative; }
-        .modal-content input, .modal-content textarea { width: 100%; padding: 0.7em; border-radius: 8px; border: none; background: rgba(255,255,255,0.07); color: white; font-size: 1rem; margin-bottom: 0.5em; font-family: 'Noto Sans KR', sans-serif;}
-        .modal-content button[type=submit] {margin-top: 1em; width: 100%; padding: 0.7em; border-radius: 8px; font-size: 1rem; background: #333; color: white; border: none; font-family: 'Noto Sans KR', sans-serif; cursor: pointer;}
-        .guestbook-entry {background: rgba(255,255,255,0.06); border-left: 2px solid #fff3; padding: 1em; margin-bottom: 0.8em; border-radius: 8px; color: #eee; text-align:left; font-family: 'Noto Sans KR', sans-serif;}
         .glass-card footer .mt-7 {margin-top:2.2rem!important;}
-        @media (max-width:700px) {.glass-card {max-width:98vw;padding-left:5vw;padding-right:5vw;}.divider {width:96%;}}
+        /* RSVP 카운트 디자인 */
+        .rsvp-row {display: flex; justify-content: center; align-items: center; gap: 1.2em; margin-bottom: 1.3em; margin-top: 1.8em;}
+        .rsvp-row button[disabled] {opacity: 0.45; cursor: default;}
+        .rsvp-msg {color:#69fdff;text-align:center;margin-top:0.45em;font-size:1.07em;}
+        @media (max-width:700px) {.glass-card {max-width:98vw;padding-left:5vw;padding-right:5vw;}.divider {width:96%;}.rsvp-row{gap:0.7em;}}
     </style>
 </head>
 <body>
@@ -84,6 +83,13 @@
                 </p>
             </div>
         </section>
+        <div class="rsvp-row">
+            <button id="rsvpBtn" class="px-6 py-3 border border-white/20 rounded-full text-xs tracking-widest hover:bg-white hover:text-black transition-all duration-500 uppercase bg-transparent">
+                초대 수락
+            </button>
+            <span id="rsvpCount" class="text-xl font-bold text-white">0</span>
+        </div>
+        <div id="rsvpMsg" class="rsvp-msg"></div>
         <div class="btn-row">
             <a href="https://map.kakao.com/?q=서울 강남구 언주로94길 5" target="_blank" class="inline-block px-8 py-3 border border-white/20 rounded-full text-xs tracking-widest hover:bg-white hover:text-black transition-all duration-500 uppercase">
                 View Map
@@ -104,94 +110,81 @@
             </div>
         </footer>
     </main>
-    <!-- Guestbook Modal -->
-    <div id="guestbookModal" class="modal-bg">
-        <div class="modal-content">
-            <button id="closeGuestbook" style="position:absolute;top:1rem;right:1rem;font-size:2rem;color:#ccc;background:transparent;border:none;">×</button>
-            <h2 class="serif" style="font-size:1.7rem; margin-bottom:1rem; color:white;">Guest Book</h2>
-            <form id="guestbookForm" style="margin-bottom:1.3rem;">
-                <input type="text" id="guestName" placeholder="이름 / Name" required autocomplete="off">
-                <textarea id="guestMessage" placeholder="축하 메시지를 남겨주세요 / Leave your message..." rows="4" required autocomplete="off"></textarea>
-                <button type="submit">메시지 남기기 / Submit Message</button>
-            </form>
-            <div id="guestbookMessages"></div>
-        </div>
-    </div>
-    <!-- Firebase SDK + 방명록 연동 -->
+    <!-- RSVP/방명록/배경 Firebase 연동 -->
     <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-      import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+        import { getDatabase, ref, get, set, onValue } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
+        const firebaseConfig = {
+            apiKey: "AIzaSyCFrTzMJEZMpxChJ_lsj_RdtPC87wzvI4U",
+            authDomain: "pre-wedding-party.firebaseapp.com",
+            databaseURL: "https://pre-wedding-party-default-rtdb.firebaseio.com",
+            projectId: "pre-wedding-party",
+            storageBucket: "pre-wedding-party.firebaseapp.com",
+            messagingSenderId: "642438297363",
+            appId: "1:642438297363:web:979d7db7511f2a4f6b4ce6",
+            measurementId: "G-3HWLRVWQWC"
+        };
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
 
-      const firebaseConfig = {
-        apiKey: "AIzaSyCFrTzMJEZMpxChJ_lsj_RdtPC87wzvI4U",
-        authDomain: "pre-wedding-party.firebaseapp.com",
-        databaseURL: "https://pre-wedding-party-default-rtdb.firebaseio.com",
-        projectId: "pre-wedding-party",
-        storageBucket: "pre-wedding-party.firebasestorage.app",
-        messagingSenderId: "642438297363",
-        appId: "1:642438297363:web:979d7db7511f2a4f6b4ce6",
-        measurementId: "G-3HWLRVWQWC"
-      };
-
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      const db = getDatabase(app);
-
-      // 방명록 작성 (submit)
-      document.getElementById('guestbookForm').onsubmit = async function(e){
-        e.preventDefault();
-        const name = document.getElementById('guestName').value.trim();
-        const message = document.getElementById('guestMessage').value.trim();
-        if(name && message) {
-          await push(ref(db, "guestbook"), { name, message, date: new Date().toISOString() });
-          document.getElementById('guestbookForm').reset();
-        }
-      };
-
-      // 방명록 전체 메시지 실시간 표시
-      function escapeHtml(text) {
-        var div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-      }
-
-      const guestbookMessagesDiv = document.getElementById('guestbookMessages');
-      onValue(ref(db, "guestbook"), snapshot => {
-        const arr = [];
-        snapshot.forEach(child => arr.push(child.val()));
-        if(arr.length === 0) {
-          guestbookMessagesDiv.innerHTML = '<div style="color:#aaa;text-align:center;">첫 번째 메시지를 남겨주세요! 💕</div>';
-          return;
-        }
-        guestbookMessagesDiv.innerHTML = arr.reverse().map(msg =>
-          `<div class="guestbook-entry">
-            <b style="color:white">${escapeHtml(msg.name)}</b>
-            <span style="font-size:0.83em;color:#bbb;">${(new Date(msg.date)).toLocaleDateString('ko-KR')}</span>
-            <div style="margin-top:0.5em;color:#ccc;font-size:1.08em;">${escapeHtml(msg.message).replace(/\\n/g,"<br>")}</div>
-          </div>`
-        ).join('');
-      });
-
-      // dreamy-blob 배경 마우스 트래킹
-      document.addEventListener('mousemove', (e) => {
-        const x = e.clientX / window.innerWidth;
-        const y = e.clientY / window.innerHeight;
-        document.querySelectorAll('.blob').forEach((blob, i) => {
-          const speed = (i+1)*18;
-          blob.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+        // RSVP 실시간 카운트 반영
+        const rsvpRef = ref(db, "rsvpCount");
+        const rsvpCountSpan = document.getElementById('rsvpCount');
+        onValue(rsvpRef, snap => {
+            const val = snap.val();
+            rsvpCountSpan.textContent = val ? val : 0;
         });
-      });
 
-      // Guestbook 모달 UI
-      document.getElementById('openGuestbook').onclick = () => {
-        document.getElementById('guestbookModal').style.display = 'block';
-      };
-      document.getElementById('closeGuestbook').onclick = () => {
-        document.getElementById('guestbookModal').style.display = 'none';
-      };
-      document.getElementById('guestbookModal').onclick = e => {
-        if(e.target === e.currentTarget) document.getElementById('guestbookModal').style.display='none';
-      };
+        const rsvpBtn = document.getElementById('rsvpBtn');
+        const rsvpMsg = document.getElementById('rsvpMsg');
+
+        // 중복방지: localStorage 체크
+        function isRSVPed() {
+            return localStorage.getItem('preWeddingRSVPed2026') === 'yes';
+        }
+        function setRSVPed() {
+            localStorage.setItem('preWeddingRSVPed2026', 'yes');
+        }
+
+        // 페이지 로드시 버튼 상태 셋팅
+        function updateRSVPBtn() {
+            if(isRSVPed()) {
+                rsvpBtn.disabled = true;
+                rsvpBtn.textContent = "참석 확인 완료";
+                rsvpMsg.textContent = "이미 참석 수락하셨습니다! 고마워요 :)";
+            } else {
+                rsvpBtn.disabled = false;
+                rsvpBtn.textContent = "초대 수락";
+                rsvpMsg.textContent = "";
+            }
+        }
+        updateRSVPBtn();
+
+        // 버튼 클릭 시 중복방지/카운트 증가
+        rsvpBtn.onclick = async function() {
+            if(isRSVPed()) return; // 중복방지
+            // 현재 카운트 받아오기
+            const snap = await get(rsvpRef);
+            let val = snap.val();
+            if(typeof val !== "number") val = 0;
+            await set(rsvpRef, val + 1);
+            setRSVPed();
+            updateRSVPBtn();
+        };
+
+        // dreamy-blob 배경 마우스 트래킹
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            document.querySelectorAll('.blob').forEach((blob, i) => {
+                const speed = (i+1)*18;
+                blob.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+            });
+        });
+        // Guestbook 모달 UI (기본 구조/기능만)
+        document.getElementById('openGuestbook').onclick = () => {
+            alert('방명록 기능은 별도 버전에서 구현해주세요!');
+        };
     </script>
 </body>
 </html>
