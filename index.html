@@ -8,13 +8,13 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hotchillisauce.github.io/Pre-Wedding-Party/">
-    <meta property="og:title" content="Pre-Wedding Party | JinBae 🤍 YuGyung">
+    <meta property="og:title" content="Pre-Wedding Party | JinBae & YuGyung">
     <meta property="og:description" content="2026. 03. 28 케미스트리, 모두 함께하는 프리웨딩 파티에 초대합니다!">
     <meta property="og:image" content="https://hotchillisauce.github.io/Pre-Wedding-Party/og-thumbnail.png">
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://hotchillisauce.github.io/Pre-Wedding-Party/">
-    <meta name="twitter:title" content="Pre-Wedding Party | JinBae 🤍 YuGyung">
+    <meta name="twitter:title" content="Pre-Wedding Party | JinBae & YuGyung">
     <meta name="twitter:description" content="2026. 03. 28 케미스트리(강남)에서 만나요!">
     <meta name="twitter:image" content="https://hotchillisauce.github.io/Pre-Wedding-Party/og-thumbnail.png">
     <!-- Fonts -->
@@ -34,7 +34,6 @@
         .shimmer {background: linear-gradient(90deg,#fff 20%,#cfcfcf 55%,#fff 80%);background-size: 220% auto;-webkit-background-clip: text;-webkit-text-fill-color: transparent;animation: shimmer 4s linear infinite;}
         @keyframes shimmer { to { background-position: 220% center; } }
         .btn-row {display: flex; gap: 10px; justify-content: center; margin-top: 0.3em; margin-bottom: 1.3em; flex-wrap: wrap;}
-        /* guestbook 모달 스타일 */
         .modal-bg { display:none; position:fixed; z-index:1000; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4);}
         .modal-content { background:#181818; border-radius:22px; max-width:430px; width:92vw; margin:9vh auto; padding:2rem 1.3rem 1.6rem 1.3rem; position:relative; }
         .modal-content input, .modal-content textarea { width: 100%; padding: 0.7em; border-radius: 8px; border: none; background: rgba(255,255,255,0.07); color: white; font-size: 1rem; margin-bottom: 0.5em; font-family: 'Noto Sans KR', sans-serif;}
@@ -118,71 +117,81 @@
             <div id="guestbookMessages"></div>
         </div>
     </div>
-    <!-- Firebase SDK 및 guestbook 연동 -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
-    <script>
-    // dreamy-blob 배경 부드러운 마우스 tracking
-    document.addEventListener('mousemove', (e) => {
+    <!-- Firebase SDK + 방명록 연동 -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+      import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyCFrTzMJEZMpxChJ_lsj_RdtPC87wzvI4U",
+        authDomain: "pre-wedding-party.firebaseapp.com",
+        databaseURL: "https://pre-wedding-party-default-rtdb.firebaseio.com",
+        projectId: "pre-wedding-party",
+        storageBucket: "pre-wedding-party.firebasestorage.app",
+        messagingSenderId: "642438297363",
+        appId: "1:642438297363:web:979d7db7511f2a4f6b4ce6",
+        measurementId: "G-3HWLRVWQWC"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+
+      // 방명록 작성 (submit)
+      document.getElementById('guestbookForm').onsubmit = async function(e){
+        e.preventDefault();
+        const name = document.getElementById('guestName').value.trim();
+        const message = document.getElementById('guestMessage').value.trim();
+        if(name && message) {
+          await push(ref(db, "guestbook"), { name, message, date: new Date().toISOString() });
+          document.getElementById('guestbookForm').reset();
+        }
+      };
+
+      // 방명록 전체 메시지 실시간 표시
+      function escapeHtml(text) {
+        var div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      const guestbookMessagesDiv = document.getElementById('guestbookMessages');
+      onValue(ref(db, "guestbook"), snapshot => {
+        const arr = [];
+        snapshot.forEach(child => arr.push(child.val()));
+        if(arr.length === 0) {
+          guestbookMessagesDiv.innerHTML = '<div style="color:#aaa;text-align:center;">첫 번째 메시지를 남겨주세요! 💕</div>';
+          return;
+        }
+        guestbookMessagesDiv.innerHTML = arr.reverse().map(msg =>
+          `<div class="guestbook-entry">
+            <b style="color:white">${escapeHtml(msg.name)}</b>
+            <span style="font-size:0.83em;color:#bbb;">${(new Date(msg.date)).toLocaleDateString('ko-KR')}</span>
+            <div style="margin-top:0.5em;color:#ccc;font-size:1.08em;">${escapeHtml(msg.message).replace(/\\n/g,"<br>")}</div>
+          </div>`
+        ).join('');
+      });
+
+      // dreamy-blob 배경 마우스 트래킹
+      document.addEventListener('mousemove', (e) => {
         const x = e.clientX / window.innerWidth;
         const y = e.clientY / window.innerHeight;
         document.querySelectorAll('.blob').forEach((blob, i) => {
-            const speed = (i+1)*18;
-            blob.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+          const speed = (i+1)*18;
+          blob.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
         });
-    });
-    // Guestbook 모달 UI
-    document.getElementById('openGuestbook').onclick = () => {
+      });
+
+      // Guestbook 모달 UI
+      document.getElementById('openGuestbook').onclick = () => {
         document.getElementById('guestbookModal').style.display = 'block';
-    };
-    document.getElementById('closeGuestbook').onclick = () => {
+      };
+      document.getElementById('closeGuestbook').onclick = () => {
         document.getElementById('guestbookModal').style.display = 'none';
-    };
-    document.getElementById('guestbookModal').onclick = e => {
+      };
+      document.getElementById('guestbookModal').onclick = e => {
         if(e.target === e.currentTarget) document.getElementById('guestbookModal').style.display='none';
-    };
-    // Firebase 설정 (아래 config을 본인 값으로 변경!)
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_AUTH_DOMAIN",
-      databaseURL: "YOUR_DATABASE_URL",
-      projectId: "YOUR_PROJECT_ID"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
-    // 방명록 작성
-    document.getElementById('guestbookForm').onsubmit = function(e){
-      e.preventDefault();
-      const name = document.getElementById('guestName').value.trim();
-      const message = document.getElementById('guestMessage').value.trim();
-      if(name && message) {
-          db.ref('guestbook').push({ name, message, date: new Date().toISOString() });
-          document.getElementById('guestbookForm').reset();
-      }
-    };
-    // 실시간 방명록 표시
-    function renderMessages(snapshot){
-      const guestbookMessagesDiv = document.getElementById('guestbookMessages');
-      let arr = [];
-      snapshot.forEach(child => arr.push(child.val()));
-      if(arr.length === 0) {
-          guestbookMessagesDiv.innerHTML = '<div style="color:#aaa">아직 메시지가 없어요!</div>';
-          return;
-      }
-      guestbookMessagesDiv.innerHTML = arr.reverse().map(msg =>
-        `<div class="guestbook-entry">
-          <b style="color:white">${escapeHtml(msg.name)}</b>
-          <span style="font-size:0.83em;color:#bbb;">${(new Date(msg.date)).toLocaleDateString('ko-KR')}</span>
-          <div style="margin-top:0.5em;color:#ccc;font-size:1.08em;">${escapeHtml(msg.message).replace(/\\n/g,"<br>")}</div>
-        </div>`
-      ).join('');
-    }
-    function escapeHtml(text) {
-      var div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
-    }
-    db.ref('guestbook').on('value', renderMessages);
+      };
     </script>
 </body>
 </html>
