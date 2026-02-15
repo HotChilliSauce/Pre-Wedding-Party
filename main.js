@@ -105,7 +105,7 @@ guestbookForm.onsubmit = async (e) => {
   e.preventDefault();
 
   const name = document.getElementById("guestName").value.trim();
-  const message = document.getElementById("guestMessage").value.trim();
+  const message = document.getElementById("guestMessage").value;
 
   if (!name || !message) return;
 
