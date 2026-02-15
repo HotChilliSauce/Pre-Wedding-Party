@@ -8,16 +8,15 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hotchillisauce.github.io/Pre-Wedding-Party/">
-    <meta property="og:title" content="Pre-Wedding Party | JinBae & YuGyung">
+    <meta property="og:title" content="Pre-Wedding Party | JinBae 🤍 YuGyung">
     <meta property="og:description" content="2026. 03. 28 케미스트리, 모두 함께하는 프리웨딩 파티에 초대합니다!">
     <meta property="og:image" content="https://hotchillisauce.github.io/Pre-Wedding-Party/og-thumbnail.png">
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://hotchillisauce.github.io/Pre-Wedding-Party/">
-    <meta name="twitter:title" content="Pre-Wedding Party | JinBae & YuGyung">
+    <meta name="twitter:title" content="Pre-Wedding Party | JinBae 🤍 YuGyung">
     <meta name="twitter:description" content="2026. 03. 28 케미스트리(강남)에서 만나요!">
     <meta name="twitter:image" content="https://hotchillisauce.github.io/Pre-Wedding-Party/og-thumbnail.png">
-    <!-- Fonts & Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -44,15 +43,12 @@
     </style>
 </head>
 <body>
-    <!-- Dreamy animated background -->
     <div class="dreamy-bg">
         <div class="blob blob1"></div>
         <div class="blob blob2"></div>
         <div class="blob blob3"></div>
     </div>
-    <!-- Invitation Card -->
     <main class="glass-card fade-in">
-        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
         <header class="mb-7">
             <h1 class="serif text-5xl md:text-6xl font-light tracking-widest shimmer mb-4">
                 Pre-Wedding Party
@@ -112,7 +108,7 @@
         </footer>
     </main>
     <!-- Guestbook Modal -->
-    <div id="guestbookModal" class="modal-bg">
+    <div id="guestbookModal" class="modal-bg" style="display:none">
         <div class="modal-content">
             <button id="closeGuestbook" style="position:absolute;top:1rem;right:1rem;font-size:2rem;color:#ccc;background:transparent;border:none;">×</button>
             <h2 class="serif" style="font-size:1.7rem; margin-bottom:1rem; color:white;">Guest Book</h2>
@@ -127,12 +123,45 @@
             </div>
         </div>
     </div>
-    <!-- Firebase SDK + RSVP + Guestbook Infinite Scroll -->
     <script type="module">
-      let modalOpened = false;
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-      import { getDatabase, ref, get, set, onValue, push, query, orderByKey, limitToLast, endBefore } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
-      const firebaseConfig = {
+    // 반드시 script는 body 맨 아래에 있어야 합니다!
+    let modalOpened = false;
+
+    // DOM 요소 변수 선언 (DOM이 완전히 로드된 뒤여야 함)
+    const openBtn = document.getElementById('openGuestbook');
+    const modal = document.getElementById('guestbookModal');
+    const closeBtn = document.getElementById('closeGuestbook');
+    const guestbookMessages = document.getElementById('guestbookMessages');
+    const guestbookScrollArea = document.getElementById('guestbookScrollArea');
+    const guestbookLoading = document.getElementById('guestbookLoading');
+    const guestbookForm = document.getElementById('guestbookForm');
+
+    openBtn.onclick = () => {
+        modal.style.display = 'block';
+        if (!modalOpened) {
+            guestbookMessages.innerHTML = '';
+            loadedKeys = [];
+            hasMore = true;
+            loadMoreGuestbook();
+            modalOpened = true;
+        }
+    };
+    closeBtn.onclick = () => {
+        modal.style.display = 'none';
+        modalOpened = false;
+    };
+    modal.onclick = e => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+            modalOpened = false;
+        }
+    };
+
+    // Firebase 연동
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+    import { getDatabase, ref, get, set, onValue, push, query, orderByKey, limitToLast, endBefore } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
+
+    const firebaseConfig = {
         apiKey: "AIzaSyCFrTzMJEZMpxChJ_lsj_RdtPC87wzvI4U",
         authDomain: "pre-wedding-party.firebaseapp.com",
         databaseURL: "https://pre-wedding-party-default-rtdb.firebaseio.com",
@@ -141,135 +170,115 @@
         messagingSenderId: "642438297363",
         appId: "1:642438297363:web:979d7db7511f2a4f6b4ce6",
         measurementId: "G-3HWLRVWQWC"
-      };
-      const app = initializeApp(firebaseConfig);
-      const db = getDatabase(app);
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
 
-      // RSVP(참석 카운트) -- 중복방지 (브라우저별)
-      const rsvpRef = ref(db, "rsvpCount");
-      const rsvpCountSpan = document.getElementById('rsvpCount');
-      onValue(rsvpRef, snap => {
-          const val = snap.val();
-          rsvpCountSpan.textContent = val ? val : 0;
-      });
-      const rsvpBtn = document.getElementById('rsvpBtn');
-      const rsvpMsg = document.getElementById('rsvpMsg');
-      function isRSVPed() { return localStorage.getItem('preWeddingRSVPed2026') === 'yes'; }
-      function setRSVPed() { localStorage.setItem('preWeddingRSVPed2026', 'yes'); }
-      function updateRSVPBtn() {
-          if(isRSVPed()) {
-              rsvpBtn.disabled = true;
-              rsvpBtn.textContent = "참석 확인 완료";
-              rsvpMsg.textContent = "이미 참석 수락하셨습니다! ���마워요 :)";
-          } else {
-              rsvpBtn.disabled = false;
-              rsvpBtn.textContent = "초대 수락";
-              rsvpMsg.textContent = "";
-          }
-      }
-      updateRSVPBtn();
-      rsvpBtn.onclick = async function() {
-          if(isRSVPed()) return;
-          const snap = await get(rsvpRef);
-          let val = snap.val();
-          if(typeof val !== "number") val = 0;
-          await set(rsvpRef, val + 1);
-          setRSVPed();
-          updateRSVPBtn();
-      };
+    // RSVP(참석 카운트) -- 중복방지 (브라우저별)
+    const rsvpRef = ref(db, "rsvpCount");
+    const rsvpCountSpan = document.getElementById('rsvpCount');
+    onValue(rsvpRef, snap => {
+        const val = snap.val();
+        rsvpCountSpan.textContent = val ? val : 0;
+    });
+    const rsvpBtn = document.getElementById('rsvpBtn');
+    const rsvpMsg = document.getElementById('rsvpMsg');
+    function isRSVPed() { return localStorage.getItem('preWeddingRSVPed2026') === 'yes'; }
+    function setRSVPed() { localStorage.setItem('preWeddingRSVPed2026', 'yes'); }
+    function updateRSVPBtn() {
+        if(isRSVPed()) {
+            rsvpBtn.disabled = true;
+            rsvpBtn.textContent = "참석 확인 완료";
+            rsvpMsg.textContent = "이미 참석 수락하셨습니다! 고마워요:)";
+        } else {
+            rsvpBtn.disabled = false;
+            rsvpBtn.textContent = "초대 수락";
+            rsvpMsg.textContent = "";
+        }
+    }
+    updateRSVPBtn();
+    rsvpBtn.onclick = async function() {
+        if(isRSVPed()) return;
+        const snap = await get(rsvpRef);
+        let val = snap.val();
+        if(typeof val !== "number") val = 0;
+        await set(rsvpRef, val + 1);
+        setRSVPed();
+        updateRSVPBtn();
+    };
 
-      // dreamy-blob 배경 마우스 트래킹
-      document.addEventListener('mousemove', (e) => {
+    // dreamy-blob 배경 마우스 트래킹
+    document.addEventListener('mousemove', (e) => {
         const x = e.clientX / window.innerWidth;
         const y = e.clientY / window.innerHeight;
         document.querySelectorAll('.blob').forEach((blob, i) => {
-          const speed = (i+1)*18;
-          blob.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+            const speed = (i+1)*18;
+            blob.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
         });
-      });
+    });
 
-      // Guestbook 모달 UI
-      document.getElementById('openGuestbook').onclick = () => {
-          document.getElementById('guestbookModal').style.display = 'block';
-          if(!modalOpened) {
-              guestbookMessages.innerHTML = '';
-              loadedKeys = [];
-              hasMore = true;
-              loadMoreGuestbook();
-              modalOpened = true;
-          }
-      };
-      document.getElementById('closeGuestbook').onclick = () => {
-          document.getElementById('guestbookModal').style.display = 'none';
-          modalOpened = false;
-      };
-      document.getElementById('guestbookModal').onclick = e => {
-          if(e.target === e.currentTarget) document.getElementById('guestbookModal').style.display='none';
-          modalOpened = false;
-      };
-
-      // 방명록 작성 및 무한 스크롤
-      document.getElementById('guestbookForm').onsubmit = async function(e){
+    // 방명록 작성
+    guestbookForm.onsubmit = async function(e){
         e.preventDefault();
         const name = document.getElementById('guestName').value.trim();
         const message = document.getElementById('guestMessage').value.trim();
         if(name && message) {
-          await push(ref(db, "guestbook"), { name, message, date: new Date().toISOString() });
-          document.getElementById('guestbookForm').reset();
-          guestbookMessages.innerHTML = '';
-          loadedKeys = [];
-          hasMore = true;
-          loadMoreGuestbook();
+            await push(ref(db, "guestbook"), { name, message, date: new Date().toISOString() });
+            guestbookForm.reset();
+            guestbookMessages.innerHTML = '';
+            loadedKeys = [];
+            hasMore = true;
+            loadMoreGuestbook();
         }
-      };
+    };
 
-      // 무한스크롤 영역
-      function escapeHtml(text) {
-          var div = document.createElement('div');
-          div.textContent = text;
-          return div.innerHTML;
-      }
-      const guestbookMessages = document.getElementById('guestbookMessages');
-      const guestbookLoading = document.getElementById('guestbookLoading');
-      const guestbookScrollArea = document.getElementById('guestbookScrollArea');
-      let loadedKeys = [];
-      let hasMore = true;
-      const PAGE_SIZE = 10;
-      async function loadMoreGuestbook() {
-          if(!hasMore) return;
-          guestbookLoading.innerText = '불러오는 중...';
-          let q;
-          if(loadedKeys.length === 0) {
-              q = query(ref(db, "guestbook"), orderByKey(), limitToLast(PAGE_SIZE));
-          } else {
-              q = query(ref(db, "guestbook"), orderByKey(), endBefore(loadedKeys[0]), limitToLast(PAGE_SIZE));
-          }
-          const snap = await get(q);
-          const arr = [];
-          snap.forEach(child => arr.push({ key: child.key, ...child.val() }));
-          if(arr.length === 0) {
-              hasMore = false;
-              guestbookLoading.innerText = '더 이상 메시지가 없습니다.';
-              return;
-          }
-          arr.reverse().forEach(msg => {
-              loadedKeys.unshift(msg.key);
-              guestbookMessages.innerHTML += `
+    // 무한스크롤 관련
+    function escapeHtml(text) {
+        var div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    let loadedKeys = [];
+    let hasMore = true;
+    const PAGE_SIZE = 10;
+    async function loadMoreGuestbook() {
+        if(!hasMore) return;
+        guestbookLoading.innerText = '불러오는 중...';
+        let q;
+        if(loadedKeys.length === 0) {
+            q = query(ref(db, "guestbook"), orderByKey(), limitToLast(PAGE_SIZE));
+        } else {
+            q = query(ref(db, "guestbook"), orderByKey(), endBefore(loadedKeys[0]), limitToLast(PAGE_SIZE));
+        }
+        const snap = await get(q);
+        const arr = [];
+        snap.forEach(child => arr.push({ key: child.key, ...child.val() }));
+        if(arr.length === 0) {
+            hasMore = false;
+            guestbookLoading.innerText = '더 이상 메시지가 없습니다.';
+            return;
+        }
+        arr.reverse().forEach(msg => {
+            loadedKeys.unshift(msg.key);
+            guestbookMessages.innerHTML += `
                 <div class="guestbook-entry">
                   <b style="color:white">${escapeHtml(msg.name)}</b>
                   <span style="font-size:0.83em;color:#bbb;">${(new Date(msg.date)).toLocaleDateString('ko-KR')}</span>
                   <div style="margin-top:0.5em;color:#ccc;font-size:1.08em;">${escapeHtml(msg.message).replace(/\\n/g,"<br>")}</div>
                 </div>
               `;
-          });
-          guestbookLoading.innerText = hasMore ? '아래로 스크롤하면 더 볼 수 있어요 ⬇️' : '';
-      }
-      guestbookScrollArea.addEventListener('scroll', function() {
-          if(!hasMore) return;
-          if(this.scrollTop + this.offsetHeight >= this.scrollHeight - 30) {
-              loadMoreGuestbook();
-          }
-      });
+        });
+        guestbookLoading.innerText = hasMore ? '아래로 스크롤하면 더 볼 수 있어요 ⬇️' : '';
+    }
+    guestbookScrollArea.addEventListener('scroll', function() {
+        if(!hasMore) return;
+        if(this.scrollTop + this.offsetHeight >= this.scrollHeight - 30) {
+            loadMoreGuestbook();
+        }
+    });
+
+    // 에러 디버깅 시 콘솔 표시
+    window.onerror = function(msg,src,linen,coln,err){console.log(msg,src,linen,coln,err);}
     </script>
 </body>
 </html>
