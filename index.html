@@ -1,175 +1,59 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pre-Wedding Party | JinBae & YuGyung</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Sans+KR:wght@100;300;400&display=swap" rel="stylesheet">
+    <title>Pre-Wedding Party</title>
     <style>
-        :root {
-            --bg-dark: #0a0a0a;
-            --accent-white: #ffffff;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--accent-white);
-            font-family: 'Noto Sans KR', sans-serif;
-            overflow-x: hidden;
-        }
-
-        .serif {
-            font-family: 'Cormorant+Garamond', serif;
-        }
-
-        /* 몽환적인 배경 애니메이션 */
-        .dreamy-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000000 100%);
-        }
-
-        .blob {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.03);
-            filter: blur(80px);
-            border-radius: 50%;
-            animation: float 20s infinite alternate;
-        }
-
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(100px, 50px) scale(1.2); }
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
-        }
-
-        .fade-in {
-            animation: fadeIn 2.5s ease-out forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            width: 80%;
-            margin: 2rem auto;
-        }
-
-        .shimmer {
-            background: linear-gradient(90deg, #ffffff 0%, #a1a1a1 50%, #ffffff 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shimmer 5s linear infinite;
-        }
-
-        @keyframes shimmer {
-            to { background-position: 200% center; }
-        }
+        body { font-family: Arial, sans-serif; }
+        .guestbook { margin-top: 20px; }
+        .guestbook form { margin-bottom: 20px; }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-4">
-
-    <!-- Dreamy Background Elements -->
-    <div class="dreamy-bg">
-        <div class="blob w-96 h-96 top-[-10%] left-[-10%]"></div>
-        <div class="blob w-80 h-80 bottom-[-5%] right-[-5%]" style="animation-delay: -5s;"></div>
-        <div class="blob w-64 h-64 top-[40%] right-[10%]" style="animation-delay: -10s;"></div>
+<body>
+    <h1>Welcome to our Pre-Wedding Party!</h1>
+    
+    <div class="guestbook">
+        <h2>Guestbook</h2>
+        <form id="guestbook-form">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <textarea id="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+        <div id="messages"></div>
     </div>
 
-    <!-- Invitation Card -->
-    <main class="glass-card max-w-lg w-full rounded-3xl p-8 md:p-12 text-center fade-in relative overflow-hidden">
-        
-        <!-- Decoration -->
-        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-
-        <!-- Main Title -->
-        <header class="mb-8">
-            <h1 class="serif text-5xl md:text-6xl font-light tracking-widest shimmer mb-4">
-                Pre-Wedding Party
-            </h1>
-            <div class="flex items-center justify-center gap-4 text-lg md:text-xl font-light tracking-widest text-gray-300">
-                <span class="serif italic">Park JinBae</span>
-                <span class="text-xs opacity-50">🤍</span>
-                <span class="serif italic">Oh YuGyung</span>
-            </div>
-        </header>
-
-        <div class="divider"></div>
-
-        <!-- Content -->
-        <section class="space-y-8 my-10">
-            <div class="space-y-2">
-                <p class="text-xs tracking-[0.3em] text-gray-400 uppercase">When</p>
-                <div class="text-xl md:text-2xl font-light">
-                    2026. 03. 28 <span class="text-sm mx-1">SAT</span>
-                </div>
-                <p class="text-sm font-light text-gray-300">
-                    p.m. 7:00 — a.m. 3:00 (익일)
-                </p>
-            </div>
-
-            <div class="space-y-2">
-                <p class="text-xs tracking-[0.3em] text-gray-400 uppercase">Where</p>
-                <div class="text-xl font-light">
-                    케미스트리 (Chemistry)
-                </div>
-                <p class="text-sm font-light text-gray-400 leading-relaxed">
-                    서울 강남구 언주로94길 5, 2층
-                </p>
-            </div>
-        </section>
-
-        <div class="divider"></div>
-
-        <!-- Message/Footer -->
-        <footer class="mt-8">
-            <p class="text-sm font-light text-gray-400 leading-loose mb-8">
-                저희의 새로운 시작을 앞두고<br>
-                소중한 분들을 모시고 즐거운 시간을 보내고자 합니다.<br>
-                함께 자리를 빛내주시면 감사하겠습니다.
-            </p>
-            
-            <a href="https://map.kakao.com/?q=서울 강남구 언주로94길 5" target="_blank" 
-               class="inline-block px-8 py-3 border border-white/20 rounded-full text-xs tracking-widest hover:bg-white hover:text-black transition-all duration-500 uppercase">
-                View Map
-            </a>
-        </div>
-
-        <!-- Decorative Bottom -->
-        <div class="mt-12 opacity-20 text-[10px] tracking-[0.5em] uppercase">
-            Strictly Black & White
-        </div>
-    </main>
-
     <script>
-        // 마우스 움직임에 따라 배경 블롭이 미세하게 반응하게 하는 효과 (선택사항)
-        document.addEventListener('mousemove', (e) => {
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-            
-            const blobs = document.querySelectorAll('.blob');
-            blobs.forEach((blob, index) => {
-                const speed = (index + 1) * 20;
-                blob.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
-            });
+        const form = document.getElementById('guestbook-form');
+        const messagesDiv = document.getElementById('messages');
+
+        // Load messages from localStorage
+        const loadMessages = () => {
+            const messages = JSON.parse(localStorage.getItem('messages')) || [];
+            messagesDiv.innerHTML = messages.map(msg => `<div><strong>${msg.name} (${msg.email}):</strong> ${msg.message}</div>`).join('');
+        };
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            // Save to localStorage
+            const messages = JSON.parse(localStorage.getItem('messages')) || [];
+            messages.push({ name, email, message });
+            localStorage.setItem('messages', JSON.stringify(messages));
+
+            // Reload messages
+            loadMessages();
+
+            // Reset form
+            form.reset();
         });
+
+        // Initial load
+        loadMessages();
     </script>
 </body>
 </html>
